@@ -1,56 +1,104 @@
-# Hyperliquid Trading Bot
+# 🚀 Hyperliquid Market Making Bot
 
-A high-frequency market making bot for the Hyperliquid exchange, supporting both Python and Rust implementations.
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
+[![Rust](https://img.shields.io/badge/Rust-1.70+-orange.svg)](https://rust-lang.org)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-niwek1%2FMarket--Maker-black.svg)](https://github.com/niwek1/Market-Maker)
 
-## Features
+A professional-grade, high-frequency market making bot for the **Hyperliquid** exchange, featuring both **Python** and **Rust** implementations with advanced risk management and real-time order execution.
 
-- **Market Making Strategy**: Avellaneda-Stoikov algorithm for optimal bid/ask pricing
-- **Risk Management**: Position limits, drawdown protection, order rate limiting
-- **Multi-Exchange Support**: Hyperliquid integration with official SDK
-- **Real-time Order Book**: L2 cache with efficient data structures
-- **Live Trading**: Real order placement with safety checks
-- **Paper Trading**: Risk-free testing environment
+## ✨ Features
 
-## Architecture
+### 🎯 **Core Trading Features**
+- **Avellaneda-Stoikov Algorithm**: Sophisticated market making strategy for optimal bid/ask pricing
+- **Real-time Order Management**: Live order placement, modification, and cancellation
+- **Multi-Asset Support**: Trade FTT, GMT, PENGU, and other Hyperliquid assets
+- **High-Frequency Trading**: Ultra-fast order execution with configurable throttling
 
-### Python Implementation
-- **Core Bot**: `main_trading_bot.py` - Main trading bot
-- **Exchange Adapter**: `mm_bot/exchanges/hyperliquid_official.py` - Hyperliquid integration
-- **Strategy**: `mm_bot/strategy/avellaneda_stoikov.py` - Market making algorithm
-- **Risk Management**: `mm_bot/risk/` - Position and drawdown limits
-- **Order Management**: `mm_bot/execution/order_manager.py` - Order lifecycle
+### 🛡️ **Risk Management**
+- **Position Limits**: Maximum position size and notional value controls
+- **Drawdown Protection**: Automatic stop-loss at configured percentage
+- **Order Rate Limiting**: Prevents excessive order placement
+- **Balance Monitoring**: Real-time account balance and margin checks
+- **Emergency Stop**: Instant cancellation of all orders and position closure
 
-### Rust Implementation
-- **Core Bot**: `src/bin/live_trading.rs` - Main trading bot
-- **Paper Trading**: `src/bin/paper_trading.rs` - Testing environment
-- **Rust Bot**: `src/bin/rust_trading_bot.rs` - Alternative Rust implementation
-- **Working Bot**: `src/bin/working_rust_bot.rs` - Simple working Rust bot
-- **Strategy**: `src/strategy.rs` - Market making algorithm
-- **Risk Management**: `src/risk.rs` - Position and drawdown limits
+### 🔧 **Technical Features**
+- **Dual Implementation**: Both Python and Rust for different use cases
+- **Paper Trading**: Risk-free testing environment with virtual money
+- **Live Trading**: Real money trading with comprehensive safety checks
+- **Real-time Monitoring**: Live dashboard with P&L tracking and metrics
+- **Configurable Strategy**: Customizable parameters for different market conditions
 
-## Quick Start
+## 🏗️ Architecture
 
-### Python Setup
+### 🐍 **Python Implementation**
+```
+main_trading_bot.py              # Main trading bot with live dashboard
+├── mm_bot/
+│   ├── exchanges/
+│   │   └── hyperliquid_official.py  # Hyperliquid SDK integration
+│   ├── strategy/
+│   │   └── avellaneda_stoikov.py    # Market making algorithm
+│   ├── risk/
+│   │   ├── limits.py                # Position and drawdown limits
+│   │   ├── kill_switch.py           # Emergency stop functionality
+│   │   └── inventory.py             # Inventory management
+│   ├── execution/
+│   │   └── order_manager.py         # Order lifecycle management
+│   └── marketdata/
+│       └── l2_cache.py              # Real-time order book cache
+```
 
-1. **Install Dependencies**:
+### 🦀 **Rust Implementation**
+```
+src/
+├── bin/
+│   ├── live_trading.rs          # Main live trading bot
+│   ├── paper_trading.rs         # Paper trading simulation
+│   ├── rust_trading_bot.rs      # Alternative implementation
+│   └── working_rust_bot.rs      # Simple working example
+├── strategy.rs                  # Trading strategy implementation
+├── risk.rs                      # Risk management system
+└── order_book.rs                # Order book data structures
+```
+
+## 🚀 Quick Start
+
+### 📋 **Prerequisites**
+- **Python 3.8+** with pip
+- **Rust 1.70+** with Cargo
+- **Hyperliquid Account** with API access
+- **Minimum $50** for safe trading (recommended $100+)
+
+### 🐍 **Python Setup**
+
+1. **Clone and Install**:
    ```bash
+   git clone https://github.com/niwek1/Market-Maker.git
+   cd Market-Maker
    pip install -e .
    ```
 
 2. **Configure Trading**:
    ```bash
-   cp configs/hyperliquid_safe.yaml configs/my_config.yaml
-   # Edit configs/my_config.yaml with your API credentials
+   cp configs/hyperliquid_template.yaml configs/hyperliquid_safe.yaml
+   # Edit configs/hyperliquid_safe.yaml with your API credentials
    ```
 
-3. **Run Paper Trading**:
+3. **Start Paper Trading** (Recommended First):
    ```bash
    python main_trading_bot.py
    ```
 
-### Rust Setup
+4. **Start Live Trading** (After Testing):
+   ```bash
+   # Update config to live mode
+   python main_trading_bot.py
+   ```
 
-1. **Install Dependencies**:
+### 🦀 **Rust Setup**
+
+1. **Build the Project**:
    ```bash
    cargo build --release
    ```
@@ -65,43 +113,23 @@ A high-frequency market making bot for the Hyperliquid exchange, supporting both
    cargo run --bin live_trading
    ```
 
-4. **Run Working Rust Bot**:
+4. **Run Simple Bot**:
    ```bash
-   # Working Rust trading bot (simulation mode)
    cargo run --bin working_rust_bot
    ```
 
-## Configuration
+## ⚙️ Configuration
 
-### Key Parameters
+### 🔑 **API Credentials Setup**
 
-```yaml
-# Trading Configuration
-symbols:
-  - "FTT"  # FTX Token
+**⚠️ CRITICAL: Never commit real API credentials to Git!**
 
-# Risk Management
-risk:
-  max_position: 22.0        # Max position size
-  max_notional: 75.0        # Max notional value
-  max_drawdown_pct: 7.7     # Stop loss percentage
-
-# Order Management
-quote_size_base: 11.0       # Order size
-min_spread_bps: 10          # Minimum spread (0.1%)
-max_spread_bps: 50          # Maximum spread (0.5%)
-```
-
-### API Credentials
-
-**⚠️ IMPORTANT: Never commit real API credentials to Git!**
-
-1. **Copy the template config**:
+1. **Copy Template Config**:
    ```bash
    cp configs/hyperliquid_template.yaml configs/hyperliquid_safe.yaml
    ```
 
-2. **Add your credentials** to `configs/hyperliquid_safe.yaml`:
+2. **Add Your Credentials** to `configs/hyperliquid_safe.yaml`:
    ```yaml
    exchanges:
      hyperliquid:
@@ -109,83 +137,165 @@ max_spread_bps: 50          # Maximum spread (0.5%)
        api_secret: "your_actual_api_secret"
    ```
 
-3. **For Rust bots**, update the credentials in the source files:
+3. **For Rust Bots**, update credentials in source files:
    ```rust
    let private_key = "your_actual_private_key";
    let profile_address = "your_actual_profile_address";
    ```
 
-4. **Add to .gitignore** to prevent accidental commits:
-   ```
-   configs/hyperliquid_safe.yaml
-   configs/*_private.yaml
-   configs/*_personal.yaml
-   ```
+### 📊 **Trading Configuration**
 
-## Safety Features
+```yaml
+# Asset Selection
+symbols:
+  - "FTT"        # FTX Token (high liquidity)
+  # - "GMT"      # Green Metaverse Token
+  # - "PENGU"    # PENGU Token
 
+# Risk Management
+risk:
+  max_position: 22.0         # Max 22 tokens per position
+  max_notional: 75.0         # Max $75 notional value
+  max_drawdown_pct: 7.7      # Stop at 7.7% loss
+
+# Order Management
+quote_size_base: 11.0        # 11 tokens per order (~$10)
+min_spread_bps: 10           # 0.1% minimum spread
+max_spread_bps: 50           # 0.5% maximum spread
+target_spread_pct: 0.1       # 0.1% target spread
+
+# Performance
+throttle_ms: 10              # 10ms between orders (ultra-fast)
+replace_after_ms: 500        # Replace orders every 0.5s
+max_order_rate_per_min: 100  # Max 100 orders per minute
+```
+
+## 🛡️ Safety Features
+
+### 🚨 **Risk Controls**
 - **Position Limits**: Maximum position size and notional value
 - **Drawdown Protection**: Automatic stop-loss at configured percentage
 - **Order Rate Limiting**: Prevents excessive order placement
 - **Balance Checks**: Ensures sufficient funds before trading
-- **Emergency Stop**: Cancels all orders and closes positions
+- **Margin Monitoring**: Real-time margin usage tracking
 
-## Risk Warning
+### 🛑 **Emergency Features**
+- **Kill Switch**: Instant cancellation of all orders
+- **Position Closure**: Automatic position liquidation
+- **Balance Alerts**: Notifications for low balance
+- **Error Handling**: Graceful handling of API errors
 
-⚠️ **This bot trades with real money on live markets. Use at your own risk.**
+## 📈 **Performance Metrics**
 
-- Start with paper trading to test strategies
-- Use small position sizes initially
-- Monitor the bot closely during live trading
-- Set appropriate risk limits
-- Never risk more than you can afford to lose
+The bot tracks comprehensive metrics including:
+- **Orders Placed/Filled**: Order execution statistics
+- **Fill Rate**: Percentage of orders that get filled
+- **P&L Tracking**: Real-time profit and loss
+- **Volume**: Total trading volume
+- **Latency**: Order execution timing
+- **Risk Metrics**: Position and drawdown monitoring
 
-## Development
+## ⚠️ Risk Warning
 
-### Project Structure
+**🚨 IMPORTANT: This bot trades with real money on live markets!**
 
+### 📋 **Before Trading**
+- ✅ **Start with paper trading** to test strategies
+- ✅ **Use small position sizes** initially
+- ✅ **Monitor the bot closely** during live trading
+- ✅ **Set appropriate risk limits** for your account size
+- ✅ **Never risk more than you can afford to lose**
+
+### 💰 **Recommended Account Sizes**
+- **Minimum**: $50 (for testing)
+- **Recommended**: $100+ (for stable operation)
+- **Optimal**: $500+ (for better performance)
+
+## 🔧 Development
+
+### 📁 **Project Structure**
 ```
-├── mm_bot/                    # Python trading framework
-│   ├── exchanges/             # Exchange adapters
-│   ├── strategy/              # Trading strategies
-│   ├── risk/                  # Risk management
-│   ├── execution/             # Order management
-│   └── marketdata/            # Market data handling
-├── src/                       # Rust implementation
-│   ├── bin/                   # Binary executables
-│   ├── strategy.rs            # Trading strategy
-│   └── risk.rs                # Risk management
-├── configs/                   # Configuration files
-└── main_trading_bot.py        # Main Python bot
+Market-Maker/
+├── main_trading_bot.py           # 🐍 Main Python trading bot
+├── configs/                      # 📋 Configuration files
+│   ├── hyperliquid_template.yaml # Template (safe to commit)
+│   └── hyperliquid_safe.yaml     # Your config (gitignored)
+├── mm_bot/                       # 🐍 Python trading framework
+│   ├── exchanges/                # Exchange integrations
+│   ├── strategy/                 # Trading strategies
+│   ├── risk/                     # Risk management
+│   ├── execution/                # Order management
+│   └── marketdata/               # Market data handling
+├── src/                          # 🦀 Rust implementation
+│   ├── bin/                      # Binary executables
+│   ├── strategy.rs               # Trading strategy
+│   └── risk.rs                   # Risk management
+├── Cargo.toml                    # 🦀 Rust dependencies
+├── pyproject.toml                # 🐍 Python dependencies
+└── README.md                     # 📖 This file
 ```
 
-### Adding New Exchanges
-
+### 🔌 **Adding New Exchanges**
 1. Create adapter in `mm_bot/exchanges/`
 2. Implement required methods from `base.py`
 3. Add configuration in `configs/`
+4. Update documentation
 
-### Adding New Strategies
-
+### 📊 **Adding New Strategies**
 1. Create strategy in `mm_bot/strategy/`
 2. Implement `calculate_quotes()` method
 3. Add configuration parameters
+4. Test with paper trading
 
-## License
+## 📚 **Documentation**
 
-MIT License - see LICENSE file for details.
+- **Setup Guide**: See Quick Start section above
+- **Configuration**: See Configuration section
+- **API Reference**: Check individual module docstrings
+- **Examples**: See `configs/hyperliquid_template.yaml`
 
-## Contributing
+## 🤝 **Contributing**
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+We welcome contributions! Please follow these steps:
 
-## Support
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
 
-For issues and questions:
-- Create an issue on GitHub
-- Check the documentation
-- Review the configuration examples
+### 📝 **Development Guidelines**
+- Follow existing code style
+- Add tests for new features
+- Update documentation
+- Test with paper trading first
+
+## 📄 **License**
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 **Support**
+
+### 🐛 **Issues**
+- **GitHub Issues**: [Create an issue](https://github.com/niwek1/Market-Maker/issues)
+- **Documentation**: Check this README and code comments
+- **Configuration**: Review `configs/hyperliquid_template.yaml`
+
+### 💬 **Community**
+- **Discussions**: Use GitHub Discussions for questions
+- **Pull Requests**: Submit improvements and bug fixes
+- **Wiki**: Check the project wiki for additional resources
+
+## 🙏 **Acknowledgments**
+
+- **Hyperliquid** for providing the trading platform
+- **Avellaneda & Stoikov** for the market making algorithm
+- **Open Source Community** for various libraries and tools
+
+---
+
+**⚠️ Disclaimer**: This software is for educational and research purposes. Trading cryptocurrencies involves substantial risk of loss. The authors are not responsible for any financial losses. Use at your own risk.
+
+**🔗 Repository**: [https://github.com/niwek1/Market-Maker](https://github.com/niwek1/Market-Maker)
+
+**⭐ Star this repository if you find it helpful!**
