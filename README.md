@@ -31,7 +31,7 @@ A professional-grade, high-frequency market making bot for the **Hyperliquid** e
 
 ## 🏗️ Architecture
 
-### 🐍 **Python Implementation**
+###  **Python Implementation**
 ```
 main_trading_bot.py              # Main trading bot with live dashboard
 ├── mm_bot/
@@ -49,7 +49,7 @@ main_trading_bot.py              # Main trading bot with live dashboard
 │       └── l2_cache.py              # Real-time order book cache
 ```
 
-### 🦀 **Rust Implementation**
+###  **Rust Implementation**
 ```
 src/
 ├── bin/
@@ -70,7 +70,7 @@ src/
 - **Hyperliquid Account** with API access
 - **Minimum $50** for safe trading (recommended $100+)
 
-### 🐍 **Python Setup**
+###  **Python Setup**
 
 1. **Clone and Install**:
    ```bash
@@ -96,7 +96,7 @@ src/
    python main_trading_bot.py
    ```
 
-### 🦀 **Rust Setup**
+###  **Rust Setup**
 
 1. **Build the Project**:
    ```bash
@@ -216,22 +216,22 @@ The bot tracks comprehensive metrics including:
 ### 📁 **Project Structure**
 ```
 Market-Maker/
-├── main_trading_bot.py           # 🐍 Main Python trading bot
+├── main_trading_bot.py           # Main Python trading bot
 ├── configs/                      # 📋 Configuration files
 │   ├── hyperliquid_template.yaml # Template (safe to commit)
 │   └── hyperliquid_safe.yaml     # Your config (gitignored)
-├── mm_bot/                       # 🐍 Python trading framework
+├── mm_bot/                       # Python trading framework
 │   ├── exchanges/                # Exchange integrations
 │   ├── strategy/                 # Trading strategies
 │   ├── risk/                     # Risk management
 │   ├── execution/                # Order management
 │   └── marketdata/               # Market data handling
-├── src/                          # 🦀 Rust implementation
+├── src/                          # Rust implementation
 │   ├── bin/                      # Binary executables
 │   ├── strategy.rs               # Trading strategy
 │   └── risk.rs                   # Risk management
-├── Cargo.toml                    # 🦀 Rust dependencies
-├── pyproject.toml                # 🐍 Python dependencies
+├── Cargo.toml                    # Rust dependencies
+├── pyproject.toml                # Python dependencies
 └── README.md                     # 📖 This file
 ```
 
