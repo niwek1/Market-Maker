@@ -1,0 +1,43 @@
+[package]
+name = "hyperliquid-trading-bot"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hyperliquid_rust_sdk = "0.1"
+ethers = "0.17"
+rand = "0.8"
+hex = "0.4"
+primitive-types = "0.11"
+fastrand = "2.0"
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+anyhow = "1.0"
+thiserror = "1.0"
+log = "0.4"
+env_logger = "0.10"
+chrono = { version = "0.4", features = ["serde"] }
+rust_decimal = { version = "1.32", features = ["serde"] }
+uuid = { version = "1.0", features = ["v4", "serde"] }
+dashmap = "5.5"
+crossbeam-channel = "0.5"
+indicatif = "0.17"
+crossterm = "0.27"
+ratatui = "0.24"
+
+[[bin]]
+name = "paper_trading"
+path = "src/bin/paper_trading.rs"
+
+[[bin]]
+name = "live_trading"
+path = "src/bin/live_trading.rs"
+
+[[bin]]
+name = "rust_trading_bot"
+path = "src/bin/rust_trading_bot.rs"
+
+[[bin]]
+name = "working_rust_bot"
+path = "src/bin/working_rust_bot.rs"
