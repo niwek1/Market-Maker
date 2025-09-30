@@ -50,7 +50,7 @@ Thumbs.db
 # Rust
 /target/
 **/*.rs.bk
-Cargo.lock
+# Cargo.lock should be committed for applications (not libraries)
 
 # Logs
 *.log
